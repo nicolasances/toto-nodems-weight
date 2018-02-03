@@ -1,6 +1,7 @@
 var express = require('express');
 var Promise = require('promise');
 var bodyParser = require("body-parser");
+var logger = require('toto-apimon-events');
 
 var getWeightsDlg = require('./dlg/GetWeightsDelegate');
 var postWeightDlg = require('./dlg/PostWeightDelegate');
@@ -18,10 +19,10 @@ app.use(function(req, res, next) {
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {res.send({status: 'running'});});
-app.get('/Weights', function(req, res) {getWeightsDlg.getWeights().then(function(result) {res.send(result);});});
-app.post('/Weights', function(req, res) {postWeightDlg.postWeight(req.body).then(function(result) {res.send(result);});});
-app.get('/Weights/:id', function(req, res) {getWeightDlg.getWeight(req.params.id).then(function(result) {res.send(result);});});
-app.delete('/Weights/:id', function(req, res) {deleteWeightDlg.deleteWeight(req.params.id).then(function() {res.send()});});
+app.get('/weights', function(req, res) {logger.apiCalled('weight', '/weights', 'GET', req.query, req.params, req.body); getWeightsDlg.getWeights().then(function(result) {res.send(result);});});
+app.post('/weights', function(req, res) {logger.apiCalled('weight', '/weights', 'POST', req.query, req.params, req.body); postWeightDlg.postWeight(req.body).then(function(result) {res.send(result);});});
+app.get('/weights/:id', function(req, res) {logger.apiCalled('weight', '/weights/{id}', 'GET', req.query, req.params, req.body); getWeightDlg.getWeight(req.params.id).then(function(result) {res.send(result);});});
+app.delete('/weights/:id', function(req, res) {logger.apiCalled('weight', '/weights/{id}', 'DELETE', req.query, req.params, req.body); deleteWeightDlg.deleteWeight(req.params.id).then(function() {res.send()});});
 
 app.listen(8080, function() {
   console.log('Weights Microservice up and running');
