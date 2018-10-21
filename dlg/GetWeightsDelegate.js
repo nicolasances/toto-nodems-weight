@@ -1,7 +1,7 @@
 var mongo = require('mongodb');
 var config = require('../config');
 var converter = require('../conv/WeightConverter');
-var moment = require(moment-timezone);
+var moment = require('moment-timezone');
 
 var MongoClient = mongo.MongoClient;
 
