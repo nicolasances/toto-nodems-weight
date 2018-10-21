@@ -21,7 +21,7 @@ app.use(function(req, res, next) {
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {res.send({api: apiName, status: 'running'});});
-app.get('/weights', function(req, res) {logger.apiCalled('weight', '/weights', 'GET', req.query, req.params, req.body); getWeightsDlg.getWeights().then(function(result) {res.send(result);});});
+app.get('/weights', function(req, res) {logger.apiCalled('weight', '/weights', 'GET', req.query, req.params, req.body); getWeightsDlg.getWeights(req.query.dateFrom).then(function(result) {res.send(result);});});
 app.post('/weights', function(req, res) {logger.apiCalled('weight', '/weights', 'POST', req.query, req.params, req.body); postWeightDlg.postWeight(req.body).then(function(result) {res.send(result);});});
 app.get('/weights/:id', function(req, res) {logger.apiCalled('weight', '/weights/{id}', 'GET', req.query, req.params, req.body); getWeightDlg.getWeight(req.params.id).then(function(result) {res.send(result);});});
 app.delete('/weights/:id', function(req, res) {logger.apiCalled('weight', '/weights/{id}', 'DELETE', req.query, req.params, req.body); deleteWeightDlg.deleteWeight(req.params.id).then(function() {res.send()});});
