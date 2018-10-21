@@ -18,13 +18,11 @@ exports.getWeights = function(dateFrom) {
       if (dateFrom != null) {
         // Extract the week out of the date
         let d = moment(dateFrom, 'YYYYMMDD').tz(config.timezone);
-        let week = d.format('WW');
+        let week = d.format('W');
         let year = d.format('YYYY');
 
         // Update the filter
-        filter = {week: week, year: year};
-
-        console.log(filter);
+        filter = {weekOfYear: {$gte: week}, year: {$gte: year}};
       }
 
       var results = db.db(config.dbName).collection(config.collections.weights)
