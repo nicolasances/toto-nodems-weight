@@ -23,6 +23,8 @@ exports.getWeights = function(dateFrom) {
 
         // Update the filter
         filter = {week: week, year: year};
+
+        console.log(filter);
       }
 
       var results = db.db(config.dbName).collection(config.collections.weights)
