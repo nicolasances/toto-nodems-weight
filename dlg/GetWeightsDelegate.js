@@ -24,7 +24,7 @@ exports.do = function(req) {
         let year = d.format('YYYY');
 
         // Update the filter
-        filter = {weekOfYear: {$gte: week}, year: {$gte: year}};
+        filter = {year: {$gte: year}};
       }
 
       var results = db.db(config.dbName).collection(config.collections.weights)
