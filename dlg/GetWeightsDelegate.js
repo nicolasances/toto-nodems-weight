@@ -5,7 +5,9 @@ var moment = require('moment-timezone');
 
 var MongoClient = mongo.MongoClient;
 
-exports.getWeights = function(dateFrom) {
+exports.do = function(req) {
+
+  var dateFrom = req.query.dateFrom;
 
   return new Promise(function(success, failure) {
 

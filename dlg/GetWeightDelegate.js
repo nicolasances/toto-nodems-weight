@@ -4,7 +4,9 @@ var converter = require('../conv/WeightConverter');
 
 var MongoClient = mongo.MongoClient;
 
-exports.getWeight = function(weightId) {
+exports.do = function(req) {
+
+  var weightId = req.params.id;
 
   return new Promise(function(success, failure) {
 
